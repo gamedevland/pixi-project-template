@@ -1,9 +1,8 @@
-import * as PIXI from "pixi.js";
 import { App } from "../system/App";
-    
-export class Game {
-    constructor() {
-        this.container = new PIXI.Container();
+import { Scene } from "../system/Scene";
+
+export class Game extends Scene {
+    create() {
         this.createBackground();
     }
     createBackground() {
@@ -12,5 +11,4 @@ export class Game {
         this.bg.height = window.innerHeight;
         this.container.addChild(this.bg);
     }
-
 }
