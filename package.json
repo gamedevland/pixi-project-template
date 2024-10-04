@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "gsap": "^3.10.4",
-    "pixi.js": "^6.5.1"
+    "pixi.js": "^8.4.1"
   },
   "devDependencies": {
     "babel-loader": "^8.2.5",

@@ -1,24 +1,21 @@
+import { Assets } from 'pixi.js';
+
 export class Loader {
-    constructor(loader, config) {
-        this.loader = loader;
-        this.config = config;
-        this.resources = {};
+    getAssetsFromFolder() {
+        const assets = [];
+        const req = require["context"]("./../../sprites", true, /\.(png|jpe?g)$/);
+
+        req.keys().forEach(name => {
+            assets.push({
+                alias: name.split('/').reverse()[0].replace(".png", ""),
+                src: req(name).default
+            });
+        });
+
+        return assets;
     }
 
     preload() {
-        for (const asset of this.config.loader) {
-            let key = asset.key.substr(asset.key.lastIndexOf('/') + 1);
-            key = key.substring(0, key.indexOf('.'));
-            if (asset.key.indexOf(".png") !== -1 || asset.key.indexOf(".jpg") !== -1) {
-                this.loader.add(key, asset.data.default)
-            }
-        }
-
-        return new Promise(resolve => {
-            this.loader.load((loader, resources) => {
-                this.resources = resources;
-                resolve();
-            });
-        });
+        return Assets.load(this.getAssetsFromFolder());
     }
 }
